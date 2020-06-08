@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CRUD JAVASCRIPT</title>
+    <meta name="view-port" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="heading">CRUD JAVASCRIPT</h2>
+
+    <div class="adduser">
+      <!-- add user -->
+      <div class="row">
+        <div class="col-md-12">
+        <p>TO-DO</p>
+      </div>
+        <div class="col-md-10">
+          <input type="text" class="form-control" id="data">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-primary" id="addUser" onclick="addUser();">ADD</button>
+        </div>
+      </div>
+      <div class="row">
+      <div class="col-md-12">
+        <br>
+        <p>TO-DO LIST</p>
+      </div>
+    </div>
+      <div class="user" id="userList">
+      </div>
+    </div>
+    </div>
+  </body>
+</html>
+<style>
+body {
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: repeating-linear-gradient(#141e30, #243b55);
+}
+*{margin: 0px;padding: 0px;}
+.heading{
+color: red;
+background: black;
+text-transform: uppercase;
+padding: 20px;
+font-size: 16px;
+letter-spacing: 1px;
+margin-bottom: 20px;
+}
+.btn, .form-control{
+  border-radius: 0px;
+  width:100%;
+}
+p{color:black;}
+.container {
+  background: rgba(0,0,0,.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);}
+</style>
+<script>
+
+var data = document.getElementById('data');
+var userList = document.getElementById('userList');
+
+// add user code
+var counter = 0;
+function addUser(){
+  var inputdata = document.getElementById('data').value;
+  var html =  '<div class="row" id="data'+counter+'" style="margin-bottom:15px;">'+
+    '<div class="col-md-6 col-sm-12 col-xs-12">'+
+      '<input type="text" class="form-control" value="'+inputdata+'" disabled>'+
+    '</div>'+
+    '<div class="col-md-2 col-sm-4 col-xs-4">'+
+      '<button type="button" class="btn btn-success" onclick="edit(this.id)" id="edit'+counter+'">Edit</button>'+
+    '</div>'+
+
+    '<div class="col-md-2 col-sm-4 col-xs-4">'+
+      '<button type="button" class="btn btn-warning" onclick="update(this.id)" id="update'+counter+'">Update</button>'+
+    '</div>'+
+    '<div class="col-md-2 col-sm-4 col-xs-4">'+
+      '<button type="button" class="btn btn-danger" onclick="remove(this.id)" id="delete'+counter+'">Delete</button>'+
+    '</div>'+
+  '</div>';
+
+  document.getElementById('userList').insertAdjacentHTML('beforeend', html);
+    counter++;
+
+}
+
+function edit(editId){
+  var parent =   document.getElementById(editId).parentNode.parentNode;
+  var child = parent.firstChild.firstChild;
+  child.removeAttribute('disabled');
+  console.log(child);
+}
+
+function update(updateId){
+  var parent =   document.getElementById(updateId).parentNode.parentNode;
+  var child = parent.firstChild.firstChild;
+  child.setAttribute("disabled",'disabled');
+  console.log(child);
+}
+
+function remove(deleteId){
+  var parent =   document.getElementById(deleteId).parentNode.parentNode;
+  parent.remove();
+  console.log(parent);
+}
+</script>
